@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5S TRADER VIP — Demo</title>
+<style>
+:root{--green:#00f59a;--dark:#07110f;--panel:#081b17;--muted:#8aa59b;--red:#ff4f61}
+*{box-sizing:border-box} body{margin:0;background:#090d16;color:#e9fff6;font-family:Arial,sans-serif;min-height:100vh;display:grid;place-items:center;padding:16px}
+.phone{width:min(430px,100%);min-height:850px;border:1px solid #164b39;border-radius:24px;background:linear-gradient(150deg,#101b22,#05090d 70%);padding:12px;box-shadow:0 0 35px #00e88a20;position:relative;overflow:hidden}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#a7c7bb;padding:4px 3px 12px}.live{color:#00f59a;font-weight:bold}.deposit{background:#00a95e;color:white;border:0;border-radius:6px;padding:7px 13px;font-weight:bold}
+.chart{height:320px;border:1px solid #263b3c;border-radius:10px;background:repeating-linear-gradient(0deg,#101923 0 1px,transparent 1px 42px),repeating-linear-gradient(90deg,#101923 0 1px,transparent 1px 42px),linear-gradient(135deg,#18202c,#090d13);position:relative;overflow:hidden;padding:16px}
+.chart:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,#263b3a66,transparent 55%);pointer-events:none}
+.candles{height:100%;display:flex;align-items:flex-end;gap:9px;position:relative;z-index:1;padding:20px 8px 35px}
+.candle{width:13px;border-radius:2px;position:relative;box-shadow:0 0 9px currentColor}.candle:before{content:"";position:absolute;width:2px;height:25px;background:currentColor;left:5px;top:-15px}.up{height:95px;background:#00e982;color:#00e982}.down{height:55px;background:#ff5366;color:#ff5366}.c2{height:130px}.c3{height:70px}.c4{height:155px}.c5{height:105px}.c6{height:45px}
+.price{position:absolute;right:8px;top:48%;z-index:2;background:#168bd3;border-radius:4px;padding:4px 7px;font-size:11px}
+.panel{position:relative;margin:-225px 12px 0 auto;width:calc(100% - 30px);max-width:365px;z-index:5;background:linear-gradient(160deg,#0b211c,#07100f);border:1px solid #31584b;border-radius:18px;padding:13px;box-shadow:0 12px 35px #000b}
+.head{display:flex;align-items:center;gap:10px}.terminal{width:34px;height:34px;border:1px solid var(--green);border-radius:9px;color:var(--green);display:grid;place-items:center;font-size:22px;box-shadow:0 0 12px #00f59a33}.name{font-weight:800;font-size:16px;letter-spacing:.5px}.vip{margin-left:auto;border:1px solid #a88b36;color:#f2d77d;border-radius:20px;padding:4px 9px;font-size:11px}.close{border:0;background:#14231f;color:#d5e8df;border-radius:6px;padding:6px 10px}
+.time{font-size:10px;color:#8da99d;margin:4px 0 12px 44px}.online{font-size:11px;color:var(--green);letter-spacing:1px;margin:9px 0}
+.scanner{height:220px;border:1px solid #183e31;border-radius:12px;background:radial-gradient(ellipse at center,#0b3427,#050c0b 72%);padding:15px;text-align:center;overflow:hidden}
+.scan-title{font-size:11px;color:#8da99d;text-align:left}.next{font-size:22px;font-weight:800;color:#00f59a;text-shadow:0 0 14px #00f59a;margin:25px 0 20px}
+.mini{height:65px;display:flex;justify-content:center;align-items:center;gap:12px}.mini i{display:block;width:12px;border-radius:3px;background:#00ef91;height:35px;box-shadow:0 0 12px #00ef91}.mini i:nth-child(even){height:50px;background:#ff5168;box-shadow:0 0 10px #ff5168}.scanning{font-size:11px;color:#00e98e;letter-spacing:2px;margin-top:13px}
+.signal{display:flex;align-items:center;gap:10px;background:#0a1714;border:1px solid #1c392f;border-radius:10px;padding:12px;margin-top:12px}.signal small{display:block;color:#82998f;font-size:9px}.signal strong{font-size:20px}.count{margin-left:auto;color:#00f59a;font-size:19px;font-weight:bold;font-variant-numeric:tabular-nums}
+.signal.upSignal strong{color:#00f59a}.signal.downSignal strong{color:#ff5366}
+.get{width:100%;margin-top:12px;border:1px solid #1a6848;border-radius:10px;background:linear-gradient(90deg,#075d3b,#087846);color:white;padding:14px;font-weight:800;letter-spacing:.5px;font-size:14px;cursor:pointer}.get:active{transform:scale(.99)}.note{text-align:center;color:#91a79e;font-size:9px;margin:9px 0 0}
+.trade{margin-top:18px;border-top:1px solid #253a39;padding-top:12px}.pair{font-weight:bold;font-size:13px}.controls{display:flex;gap:8px;margin-top:9px}.field{flex:1;background:#0b1218;border:1px solid #304147;border-radius:6px;padding:9px;color:white;font-size:12px}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1;border:0;border-radius:6px;padding:11px;color:white;font-weight:bold}.buy{background:#079e50}.sell{background:#c83c45}
+.footer{text-align:center;color:#61786f;font-size:9px;margin-top:14px}
+@media(max-width:390px){.phone{padding:9px}.panel{margin-top:-225px;padding:10px}.scanner{height:205px}}
+</style>
+</head>
+<body>
+<main class="phone">
+ <div class="top"><span>💎 <b class="live">LIVE</b> &nbsp; $108,764.60</span><button class="deposit">Deposit</button></div>
+ <section class="chart"><div class="candles"><i class="candle up"></i><i class="candle down"></i><i class="candle up c2"></i><i class="candle up c3"></i><i class="candle down c5"></i><i class="candle up c4"></i><i class="candle down c6"></i><i class="candle up c2"></i><i class="candle down"></i></div><span class="price">177.166</span></section>
+ <section class="panel">
+  <div class="head"><div class="terminal">›_</div><div class="name">5S TRADER<br>VIP</div><span class="vip">VIP</span><button class="close" aria-label="Close">×</button></div>
+  <div class="time">TIME: <span id="clock">14:37:56</span></div>
+  <div class="online">● AI ENGINE ONLINE</div>
+  <div class="scanner">
+   <div class="scan-title">AI SIGNAL SCANNER</div>
+   <div class="next" id="next">Next Candle??</div>
+   <div class="mini"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+   <div class="scanning" id="scanText">SCANNING...</div>
+  </div>
+  <div class="signal" id="signalBox"><span>⌛</span><div><small>LATEST SIGNAL</small><strong id="signal">SCANNING</strong></div><div class="count" id="timer">00:00:00</div></div>
+  <button class="get" id="get">⚡ GET SIGNAL</button>
+  <p class="note">Demo signal generator · Not financial advice</p>
+  <div class="trade">
+   <div class="pair">● EUR/JPY &nbsp; <span style="color:#f1d56d">93%</span></div>
+   <div class="controls"><div class="field">Timer &nbsp; 00:01</div><div class="field">Investment &nbsp; 1,000 $</div></div>
+   <div class="actions"><button class="buy" id="buy">Buy ▲</button><button class="sell" id="sell">Sell ▼</button></div>
+  </div>
+ </section>
+ <div class="footer">VISUAL DEMO ONLY · No Quotex connection · No real trades</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let last='UP', seconds=47, interval;
+function clock(){const d=new Date();$('clock').textContent=d.toLocaleTimeString('en-GB');}
+setInterval(clock,1000);clock();
+$('get').addEventListener('click',()=>{
+ $('get').disabled=true;$('get').textContent='⏳ ANALYZING...';
+ $('signal').textContent='SCANNING';$('timer').textContent='00:00:03';
+ $('scanText').textContent='ANALYZING DEMO...';$('next').textContent='Please wait';
+ let t=3;const a=setInterval(()=>{t--;$('timer').textContent='00:00:0'+t;if(t<=0){clearInterval(a);
+ last=last==='UP'?'DOWN':'UP';const isUp=last==='UP';
+ $('signal').textContent=last;$('next').textContent=isUp?'↑ UP':'↓ DOWN';
+ $('scanText').textContent='DEMO SIGNAL READY';$('signalBox').className='signal '+(isUp?'upSignal':'downSignal');
+ $('timer').textContent='00:00:47';$('get').disabled=false;$('get').textContent='⚡ GET SIGNAL';}},1000);
+});
+$('buy').onclick=()=>alert('Demo only: এটি কোনো বাস্তব ট্রেড নয়।');
+$('sell').onclick=()=>alert('Demo only: এটি কোনো বাস্তব ট্রেড নয়।');
+</script>
+</body></html>
